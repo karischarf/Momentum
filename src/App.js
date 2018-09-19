@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import './App.css'
-import NewTask from './NewTask'
+import Task from './Task'
 import EditTask from './EditTask'
 
 class App extends Component {
@@ -9,24 +9,46 @@ class App extends Component {
     this.state = {
       editing: false,
       completed: false,
-      tasksArray: []
+      tasksArray: [
+        'React', 'Dashi', 'Hugs'
+      ],
+      newTask: ''
     }
     // this.getTasks = this.getTasks.bind(this)
     this.addTask = this.addTask.bind(this)
     this.markComplete = this.markComplete.bind(this)
+    this.handleChange = this.handleChange.bind(this)
   }
 
-  // getTasks () {
+  addTask (newTask) {
+    let tasksArray = this.state.tasksArray.slice()
+    let newArray = tasksArray.concat(newTask)
+    console.log(newArray)
+    this.setState({
+      tasksArray: newArray
+    })
+  }
 
-  //
+  handleChange (event) {
+    console.log(event.target.value)
+    let newTask = event.target.value
+    this.setState({
+      newTask: newTask
+    })
+  }
 
-  addTask (newTask, newArray) {
-    let tasksArray = this.state.tasksArray
-    let newArray = tasksArray.concat(tasksArray[newArray])
-    )
-  this.setState(newArray)}
-  
-    
+  // handleSubmit (event) {
+  // console.log(this.state.tasksArray)
+  // event.preventDefault()
+  // let newTask=this.state.newTask
+  //  let newArray = newTask.concat(tasksArray)
+  //  this.setState({
+  //    tasksArray.concat({newTask})
+  //    })
+  //    this.setState({ newTask: ' '})
+  //    console.log(this.state.tasks)
+  //  }
+
   markComplete () {
 
   }
@@ -43,19 +65,16 @@ class App extends Component {
     return (
       <div>
         <h1>Do Something</h1>
-        <NewTask tasks={this.tasksArray} addTaskFn={this.addTask} />
-        {this.state.tasksArray.map((task) =>
-          <div>
-            <input type='checkbox' onClick={this.markComplete} />
-            <p>{task.task}</p>
-            <button onClick={this.editButton}>Edit</button>
-            <button onClick={this.deleteTask}>Delete</button>
-            {/* button for completion */}
-            {/* Task text */}
-            {/* Button for edit */}
-            {/* Button to delete */}
+        <div className='task-list'>
+          <input className='taskInput' type='text' placeholder='Enter text to add to list item' autoFocus onChange={this.handleChange} />
+          <div> <button className='add-task-button' onClick={() => this.addTask(this.state.newTask)}>Add Task</button>
           </div>
-        ) }
+        </div>
+        <div>
+          {this.state.tasksArray.map((task, idx) =>
+            <Task key={idx} task={task} />
+          )}
+        </div>
       </div>
     )
   }
