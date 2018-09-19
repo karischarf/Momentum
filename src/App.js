@@ -1,12 +1,14 @@
 import React, { Component } from 'react'
 import './App.css'
-import AddTask from './AddTask'
+import NewTask from './NewTask'
 import EditTask from './EditTask'
 
 class App extends Component {
   constructor () {
     super()
     this.state = {
+      editing: false,
+      completed: false,
       tasksArray: []
     }
     // this.getTasks = this.getTasks.bind(this)
@@ -16,14 +18,15 @@ class App extends Component {
 
   // getTasks () {
 
-  // }
+  //
 
-  addTask (newTask) {
+  addTask (newTask, newArray) {
     let tasksArray = this.state.tasksArray
-    tasksArray.push(newTask)
-    // this.getTasks()
-  }
-
+    let newArray = tasksArray.concat(tasksArray[newArray])
+    )
+  this.setState(newArray)}
+  
+    
   markComplete () {
 
   }
@@ -37,14 +40,13 @@ class App extends Component {
   }
 
   render () {
-    const { newTask } = this.state
     return (
       <div>
         <h1>Do Something</h1>
-        <AddTask newTask={newTask} addTaskFn={this.addTask} />
+        <NewTask tasks={this.tasksArray} addTaskFn={this.addTask} />
         {this.state.tasksArray.map((task) =>
           <div>
-            <button onClick={this.markComplete}>Complete</button>
+            <input type='checkbox' onClick={this.markComplete} />
             <p>{task.task}</p>
             <button onClick={this.editButton}>Edit</button>
             <button onClick={this.deleteTask}>Delete</button>

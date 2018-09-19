@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import './App.css'
 
-class AddTask extends Component {
+class NewTask extends Component {
   constructor (props) {
     super(props)
     this.state = {
@@ -36,4 +36,4 @@ class AddTask extends Component {
     )
   }
 }
-export default AddTask
+export default NewTask
