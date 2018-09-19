@@ -37,6 +37,7 @@ class App extends Component {
   }
 
   render () {
+    const { newTask } = this.state
     return (
       <div>
         <h1>Do Something</h1>
